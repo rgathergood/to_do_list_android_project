@@ -4,6 +4,8 @@
 
 ## To-Do List
 
+https://trello.com/b/SWRyP6Zr/android-project
+
 Goal: Practice what we learned in the Java / Android weeks and research how to persist data.
 
 ### MVP
