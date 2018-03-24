@@ -9,9 +9,9 @@ public class Task {
     String name;
     String description;
     String dateAdded;
-    boolean completed;
+    String completed;
 
-    public Task(int id, String name, String description, String dateAdded, boolean completed) {
+    public Task(int id, String name, String description, String dateAdded, String completed) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,7 +35,7 @@ public class Task {
         return dateAdded;
     }
 
-    public boolean isCompleted() {
+    public String isCompleted() {
         return completed;
     }
 

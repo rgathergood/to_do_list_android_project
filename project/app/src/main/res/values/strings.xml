@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">To Do List</string>
     <string name="title_activity_main2">Main2Activity</string>
+
+    <array name="priority">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </array>
 </resources>

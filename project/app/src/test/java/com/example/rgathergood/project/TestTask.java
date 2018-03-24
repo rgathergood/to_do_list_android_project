@@ -15,7 +15,7 @@ public class TestTask {
 
     @Before
     public void before() {
-        task = new Task(1, "Wash the Cat", "Need to buy more shampoo first", "23/03/17", false);
+        task = new Task(1, "Wash the Cat", "Need to buy more shampoo first", "23/03/17", "No");
     }
 
     @Test
@@ -40,6 +40,6 @@ public class TestTask {
 
     @Test
     public void taskIsCompleted() {
-        assertEquals(false, task.isCompleted());
+        assertEquals("No", task.isCompleted());
     }
 }
