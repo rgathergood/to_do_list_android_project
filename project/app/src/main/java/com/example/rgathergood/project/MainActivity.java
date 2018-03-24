@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.fab_add_task).setOnClickListener(this);
 
+        TaskInfoAdapter infoAdapter = new TaskInfoAdapter(this, taskList);
+        ListView listView = findViewById(R.id.listViewTasks);
+        listView.setAdapter(infoAdapter);
+
         loadTasksFromDatabase();
     }
 
@@ -57,5 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, TaskAddActivity.class));
                 break;
         }
+    }
+
+    public void onListItemClick(View listItem) {
+        Task task = (Task) listItem.getTag();
+        Intent intent = new Intent(this, TaskInfoActivity.class);
+//        intent.putExtra("task", task);
+        startActivity(intent);
     }
 }

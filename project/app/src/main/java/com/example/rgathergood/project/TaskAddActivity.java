@@ -51,7 +51,7 @@ public class TaskAddActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateAdded = simpleDateFormat.format(calendar.getTime());
 
         if (mDatabase.addTask(name, description, dateAdded, priority))
