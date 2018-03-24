@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadTasksFromDatabase() {
-        Cursor cursor = mDatabase.getAllEmployees();
+        Cursor cursor = mDatabase.getAllTasks();
 
         if (cursor.moveToFirst()) {
             do {

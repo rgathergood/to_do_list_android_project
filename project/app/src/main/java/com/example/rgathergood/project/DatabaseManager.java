@@ -44,7 +44,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     }
 
-    Cursor getAllEmployees() {
+    Cursor getAllTasks() {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
