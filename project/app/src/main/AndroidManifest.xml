@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TaskAddActivity" />
-        <activity android:name=".TaskInfoActivity"></activity>
+        <activity android:name=".TaskInfoActivity" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>
