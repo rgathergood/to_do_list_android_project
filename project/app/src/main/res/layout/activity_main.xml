@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="onListItemClick"
     tools:context="com.example.rgathergood.project.MainActivity">
 
     <ListView

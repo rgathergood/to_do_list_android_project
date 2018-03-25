@@ -45,7 +45,7 @@ public class TaskAddActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if (description.isEmpty()) {
-            editTextDescription.setError("Description can't be empty1");
+            editTextDescription.setError("Description can't be empty!");
             editTextDescription.requestFocus();
             return;
         }
@@ -58,6 +58,7 @@ public class TaskAddActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, "Task Added", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "Task Not Added", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
