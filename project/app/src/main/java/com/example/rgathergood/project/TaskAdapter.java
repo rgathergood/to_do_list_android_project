@@ -61,6 +61,8 @@ public class TaskAdapter extends ArrayAdapter<Task>{
             }
         });
 
+        view.setTag(task);
+
         return view;
     }
 

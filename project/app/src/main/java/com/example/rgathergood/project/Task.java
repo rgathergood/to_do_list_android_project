@@ -1,10 +1,12 @@
 package com.example.rgathergood.project;
 
+import java.io.Serializable;
+
 /**
  * Created by rgathergood on 23/03/2018.
  */
 
-public class Task {
+public class Task implements Serializable {
     int id;
     String name;
     String description;

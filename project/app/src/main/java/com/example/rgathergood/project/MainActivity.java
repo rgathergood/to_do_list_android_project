@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.fab_add_task).setOnClickListener(this);
 
-        TaskInfoAdapter infoAdapter = new TaskInfoAdapter(this, taskList);
-        ListView listView = findViewById(R.id.listViewTasks);
-        listView.setAdapter(infoAdapter);
+//        TaskInfoAdapter infoAdapter = new TaskInfoAdapter(this, taskList);
+//        ListView listView = findViewById(R.id.listViewTasks);
+//        listView.setAdapter(infoAdapter);
 
         loadTasksFromDatabase();
     }
@@ -85,9 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onListItemClick(View listItem) {
         Task task = (Task) listItem.getTag();
-//        Log.d("mainActivity", task.getName());
+        Log.d("mainActivity", task.getName());
         Intent intent = new Intent(this, TaskInfoActivity.class);
-//        intent.putExtra("task", task);
+        intent.putExtra("task", task);
         startActivity(intent);
     }
 }
