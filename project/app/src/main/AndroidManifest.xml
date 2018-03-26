@@ -10,18 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TaskAddActivity"
+        <activity android:name=".Activity.TaskAddActivity"
+            android:label="Add New Task"
             android:screenOrientation="portrait"/>
-        <activity android:name=".TaskInfoActivity"
+        <activity android:name=".Activity.TaskInfoActivity"
+            android:label="Task Information"
             android:screenOrientation="portrait"/>
-        <activity android:name=".AboutActivity"
+        <activity android:name=".Activity.AboutActivity"
+            android:label="About"
             android:screenOrientation="portrait"></activity>
     </application>
 

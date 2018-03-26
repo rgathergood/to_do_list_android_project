@@ -1,10 +1,13 @@
-package com.example.rgathergood.project;
+package com.example.rgathergood.project.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.rgathergood.project.R;
+import com.example.rgathergood.project.Task;
 
 import java.io.Serializable;
 

@@ -42,13 +42,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-    }
-
-    Cursor getAllTasks() {
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(sqLiteDatabase);
     }
 
     public ArrayList<Task> selectAllDesc() {
@@ -76,7 +72,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return tasks;
     }
 
-    boolean addTask(String name, String description, String dateAdded, String completed) {
+    public boolean addTask(String name, String description, String dateAdded, String completed) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -88,7 +84,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues) != -1;
     }
 
-    boolean updateTask(int id, String name, String description, String completed) {
+    public boolean updateTask(int id, String name, String description, String completed) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME, name);
@@ -97,7 +93,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return sqLiteDatabase.update(TABLE_NAME, contentValues, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0;
     }
 
-    boolean deleteTask(int id) {
+    public boolean deleteTask(int id) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         return sqLiteDatabase.delete(TABLE_NAME, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0;
     }

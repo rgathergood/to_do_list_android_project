@@ -1,4 +1,4 @@
-package com.example.rgathergood.project;
+package com.example.rgathergood.project.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.rgathergood.project.DatabaseManager;
+import com.example.rgathergood.project.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

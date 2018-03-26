@@ -3,7 +3,7 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="about">About</string>
     <string name="about_this_app">About this App</string>
-
+    <string name="priority">Priority</string>
     <array name="priority">
         <item>Low</item>
         <item>Medium</item>

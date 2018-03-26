@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.rgathergood.project.MainActivity">
+    tools:context="com.example.rgathergood.project.Activity.MainActivity">
 
     <ListView
         android:id="@+id/listViewTasks"
@@ -20,7 +20,7 @@
         android:layout_marginEnd="10dp"
         android:elevation="8dp"
         android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="@android:color/holo_orange_dark"
+        app:backgroundTint="#c55900"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

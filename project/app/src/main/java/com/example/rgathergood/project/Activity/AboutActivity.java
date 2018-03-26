@@ -1,7 +1,9 @@
-package com.example.rgathergood.project;
+package com.example.rgathergood.project.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.rgathergood.project.R;
 
 public class AboutActivity extends AppCompatActivity {
 

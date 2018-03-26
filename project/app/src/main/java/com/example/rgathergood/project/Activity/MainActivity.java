@@ -1,7 +1,8 @@
-package com.example.rgathergood.project;
+package com.example.rgathergood.project.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,10 +11,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import java.io.Serializable;
+import com.example.rgathergood.project.DatabaseManager;
+import com.example.rgathergood.project.R;
+import com.example.rgathergood.project.Task;
+import com.example.rgathergood.project.TaskAdapter;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
 
+        refreshList();
+    }
+
+    public void refreshList() {
         taskList = mDatabase.selectAllDesc();
 
         TaskAdapter taskAdapter = new TaskAdapter(this, taskList);
@@ -75,5 +84,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, TaskInfoActivity.class);
         intent.putExtra("task", task);
         startActivity(intent);
+    }
+
+    public void deleteTask(final Task task) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Are you sure this is Complete? The task will be deleted.");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (mDatabase.deleteTask(task.getId())) {
+                    refreshList();
+                    Toast.makeText(MainActivity.this, "Task completed! Well done!", Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+    public void onClickDelete(View view) {
+        Task task = (Task) view.getTag();
+        deleteTask(task);
     }
 }
