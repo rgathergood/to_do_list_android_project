@@ -1,5 +1,6 @@
 package com.example.rgathergood.project;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -66,6 +67,8 @@ public class TaskAddActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.buttonAddTask:
                 addTask();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
         }
     }
