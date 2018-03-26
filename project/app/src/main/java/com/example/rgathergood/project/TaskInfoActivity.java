@@ -3,6 +3,7 @@ package com.example.rgathergood.project;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.Serializable;

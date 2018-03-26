@@ -67,8 +67,6 @@ public class TaskAddActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.buttonAddTask:
                 addTask();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
                 break;
         }
     }

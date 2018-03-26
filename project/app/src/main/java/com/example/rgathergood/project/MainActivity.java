@@ -18,7 +18,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseManager mDatabase;
-    List<Task> taskList;
+    ArrayList<Task> taskList;
     ListView listView;
 
     @Override
@@ -28,35 +28,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDatabase = new DatabaseManager(this);
 
-        taskList = new ArrayList<>();
-        listView = (ListView) findViewById(R.id.listViewTasks);
+        listView = findViewById(R.id.listViewTasks);
 
         findViewById(R.id.fab_add_task).setOnClickListener(this);
-
-//        TaskInfoAdapter infoAdapter = new TaskInfoAdapter(this, taskList);
-//        ListView listView = findViewById(R.id.listViewTasks);
-//        listView.setAdapter(infoAdapter);
-
-        loadTasksFromDatabase();
     }
 
-    private void loadTasksFromDatabase() {
-        Cursor cursor = mDatabase.getAllTasks();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        if (cursor.moveToFirst()) {
-            do {
-                taskList.add(new Task(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4)
-                ));
-            } while (cursor.moveToNext());
+        taskList = mDatabase.selectAllDesc();
 
-            TaskAdapter adapter = new TaskAdapter(this, R.layout.list_layout_task, taskList, mDatabase);
-            listView.setAdapter(adapter);
-        }
+        TaskAdapter taskAdapter = new TaskAdapter(this, taskList);
+
+        listView.setAdapter(taskAdapter);
     }
 
     @Override

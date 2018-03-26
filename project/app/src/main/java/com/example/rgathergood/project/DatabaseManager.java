@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by rgathergood on 24/03/2018.
  */
@@ -47,6 +49,31 @@ public class DatabaseManager extends SQLiteOpenHelper {
     Cursor getAllTasks() {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    }
+
+    public ArrayList<Task> selectAllDesc() {
+
+        SQLiteDatabase mDatabase = this.getReadableDatabase();
+        String sortOrder = COLUMN_ID + " DESC";
+        Cursor cursor = mDatabase.query(TABLE_NAME, null, null, null, null, null, sortOrder);
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(COLUMN_ID));
+            String name = cursor.getString(
+                    cursor.getColumnIndexOrThrow(COLUMN_NAME));
+            String description = cursor.getString(
+                    cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
+            String dateAdded = cursor.getString(
+                    cursor.getColumnIndexOrThrow(COLUMN_DATE_ADDED));
+            String completed = cursor.getString(
+                    cursor.getColumnIndexOrThrow(COLUMN_COMPLETED));
+
+            Task task = new Task(id, name, description, dateAdded, completed);
+            tasks.add(task);
+        }
+        return tasks;
     }
 
     boolean addTask(String name, String description, String dateAdded, String completed) {

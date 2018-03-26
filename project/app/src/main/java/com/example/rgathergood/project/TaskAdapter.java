@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,46 +26,35 @@ import java.util.List;
 public class TaskAdapter extends ArrayAdapter<Task>{
 
     Context context;
-    int layoutRes;
     List<Task> taskList;
     DatabaseManager mDatabase;
 
-    public TaskAdapter(Context context, int layoutRes, List<Task> taskList, DatabaseManager mDatabase) {
-        super(context, layoutRes, taskList);
-
+    public TaskAdapter(Context context, ArrayList<Task> taskList) {
+        super(context, 0, taskList);
         this.context = context;
-        this.layoutRes = layoutRes;
         this.taskList = taskList;
-        this.mDatabase = mDatabase;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Task task = getItem(position);
 
-        View view = inflater.inflate(layoutRes, null);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_layout_task, parent, false);
+        }
 
-        TextView textViewName = view.findViewById(R.id.textViewTaskName);
-        TextView textViewDateAdded = view.findViewById(R.id.textViewDateAdded);
-        //completed spinner here??
-
-        final Task task = taskList.get(position);
+        TextView textViewName = convertView.findViewById(R.id.textViewTaskName);
+        TextView textViewDateAdded = convertView.findViewById(R.id.textViewDateAdded);
 
         textViewName.setText(task.getName());
         textViewDateAdded.setText(task.getDateAdded());
 
-        view.findViewById(R.id.button_complete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteTask(task);
-            }
-        });
+        convertView.setTag(task);
 
-        view.setTag(task);
-
-        return view;
+        return convertView;
     }
+
 
     private void deleteTask(final Task task) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -76,8 +66,6 @@ public class TaskAdapter extends ArrayAdapter<Task>{
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (mDatabase.deleteTask(task.getId()))
                     Toast.makeText(context, "Task completed! Well done!", Toast.LENGTH_SHORT).show();
-
-                reloadTasksFromDatabase();
             }
         });
 
@@ -90,24 +78,5 @@ public class TaskAdapter extends ArrayAdapter<Task>{
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }
-
-    public void reloadTasksFromDatabase() {
-        Cursor cursor = mDatabase.getAllTasks();
-
-        if (cursor.moveToFirst()) {
-            taskList.clear();
-            do {
-                taskList.add(new Task(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4)
-                ));
-            } while (cursor.moveToNext());
-
-            notifyDataSetChanged();
-        }
     }
 }

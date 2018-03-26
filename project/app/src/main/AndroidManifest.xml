@@ -12,16 +12,17 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
-            //Do this for every activity
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TaskAddActivity" />
-        <activity android:name=".TaskInfoActivity" />
-        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".TaskAddActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TaskInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AboutActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
