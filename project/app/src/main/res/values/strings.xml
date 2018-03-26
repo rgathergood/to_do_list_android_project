@@ -4,6 +4,10 @@
     <string name="about">About</string>
     <string name="about_this_app">About this App</string>
     <string name="priority">Priority</string>
+    <string name="add_task">Add Task</string>
+    <string name="task_description">Task Description</string>
+    <string name="task_name">Task Name</string>
+    <string name="edit">Edit</string>
     <array name="priority">
         <item>Low</item>
         <item>Medium</item>

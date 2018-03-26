@@ -62,7 +62,8 @@ public class TaskAddActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, "Task Added", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "Task Not Added", Toast.LENGTH_SHORT).show();
-
+        editTextName.setText(null);
+        editTextDescription.setText(null);
     }
 
     @Override

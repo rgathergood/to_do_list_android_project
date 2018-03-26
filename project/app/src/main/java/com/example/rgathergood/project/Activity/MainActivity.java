@@ -86,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    public void onClickDelete(View view) {
+        Task task = (Task) view.getTag();
+        deleteTask(task);
+    }
+
     public void deleteTask(final Task task) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -97,8 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (mDatabase.deleteTask(task.getId())) {
                     refreshList();
                     Toast.makeText(MainActivity.this, "Task completed! Well done!", Toast.LENGTH_SHORT).show();
-
-
                 }
             }
         });
@@ -112,11 +115,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }
-
-
-    public void onClickDelete(View view) {
-        Task task = (Task) view.getTag();
-        deleteTask(task);
     }
 }
