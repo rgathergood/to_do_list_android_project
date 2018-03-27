@@ -31,11 +31,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+    private Date date = new Date();
 
     DatabaseManager mDatabase;
     ArrayList<Task> taskList;
     ListView listView;
+    TextView dateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         mDatabase = new DatabaseManager(this);
 
         listView = findViewById(R.id.listViewTasks);
+
+        dateView = findViewById(R.id.textViewDate);
     }
 
     @Override
@@ -60,6 +65,38 @@ public class MainActivity extends AppCompatActivity {
         TaskAdapter taskAdapter = new TaskAdapter(this, taskList);
 
         listView.setAdapter(taskAdapter);
+    }
+
+//    public String setTodaysDate(Date date) {  // Pass in a java.util.date, get out a string of "yyyy/MM/dd"
+//        SimpleDateFormat dateSQLformat = new SimpleDateFormat("yyyy/MM/dd");
+//        return dateSQLformat.format(date);
+//    }
+    //Do I need this?
+
+    public void showDatePickerDialog(View view) {
+        DatePickerFragment datePickerFragment = new DatePickerFragment();
+        datePickerFragment.onDateSetListener = this;
+        datePickerFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        String monthStr = "";
+        String dayStr = "";
+        month += 1;
+        if (month < 10) {
+            monthStr = "0" + month;
+        } else {
+            monthStr = String.valueOf(month);
+        }
+        if (day < 10) {
+            dayStr = "0" + day;
+        } else {
+            dayStr = String.valueOf(day);
+        }
+
+        TextView dateView = (TextView) findViewById(R.id.textViewDate);
+        dateView.setText("Complete by: " + dayStr + "/" + monthStr + "/" + year);
     }
 
     @Override
@@ -132,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText editTextName = view.findViewById(R.id.task_name_add);
         final EditText editTextDescription = view.findViewById(R.id.task_description_add);
+        final TextView editDeadlineDate = view.findViewById(R.id.textViewDate);
         final Spinner spinner = view.findViewById(R.id.spinner_priority);
 
         view.findViewById(R.id.buttonAddTask).setOnClickListener(new View.OnClickListener() {
@@ -139,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = editTextName.getText().toString().trim();
                 String description = editTextDescription.getText().toString().trim();
+                Date deadlineDate = new Date(dateView.getText().toString());
+                //problem here
                 String priority = spinner.getSelectedItem().toString().trim();
 
                 if (name.isEmpty()) {
@@ -153,11 +193,10 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String dateAdded = simpleDateFormat.format(calendar.getTime());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String deadlineDateString = simpleDateFormat.format(date);
 
-                if (mDatabase.addTask(name, description, dateAdded, priority)) {
+                if (mDatabase.addTask(name, description, deadlineDateString, priority)) {
                     Toast.makeText(MainActivity.this, "Task Added", Toast.LENGTH_LONG).show();
                     refreshList();
                     alertDialog.dismiss();
@@ -166,5 +205,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static class DatePickerFragment extends DialogFragment {
+
+        public static DatePickerDialog.OnDateSetListener onDateSetListener;
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), onDateSetListener, year, month, day);
+        }
     }
 }
