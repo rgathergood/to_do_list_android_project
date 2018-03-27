@@ -84,7 +84,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable 
                 if (mDatabase.updateTask(task.getId(), name, description, priority)) {
                     Toast.makeText(TaskInfoActivity.this, "Task Updated!", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
-                    //refresh
+                    TaskInfoActivity.this.finish();
                 } else {
                     Toast.makeText(TaskInfoActivity.this, "Task Not Updated!", Toast.LENGTH_SHORT).show();
                 }

@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class DatabaseManager extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "TaskDatabase";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String TABLE_NAME = "tasks";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_DATE_ADDED = "date";
-    public static final String COLUMN_COMPLETED = "completed";
+    public static final String COLUMN_PRIORITY = "priority";
 
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,7 +35,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 "    " + COLUMN_NAME + " varchar(200) NOT NULL,\n" +
                 "    " + COLUMN_DESCRIPTION + " varchar(200) NOT NULL,\n" +
                 "    " + COLUMN_DATE_ADDED + " datetime NOT NULL,\n" +
-                "    " + COLUMN_COMPLETED + " varchar(200) NOT NULL\n" +
+                "    " + COLUMN_PRIORITY + " varchar(200) NOT NULL\n" +
                 ");");
 
         sqLiteDatabase.execSQL(sql);
@@ -63,33 +63,33 @@ public class DatabaseManager extends SQLiteOpenHelper {
                     cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
             String dateAdded = cursor.getString(
                     cursor.getColumnIndexOrThrow(COLUMN_DATE_ADDED));
-            String completed = cursor.getString(
-                    cursor.getColumnIndexOrThrow(COLUMN_COMPLETED));
+            String priority = cursor.getString(
+                    cursor.getColumnIndexOrThrow(COLUMN_PRIORITY));
 
-            Task task = new Task(id, name, description, dateAdded, completed);
+            Task task = new Task(id, name, description, dateAdded, priority);
             tasks.add(task);
         }
         return tasks;
     }
 
-    public boolean addTask(String name, String description, String dateAdded, String completed) {
+    public boolean addTask(String name, String description, String dateAdded, String priority) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME, name);
         contentValues.put(COLUMN_DESCRIPTION, description);
         contentValues.put(COLUMN_DATE_ADDED, dateAdded);
-        contentValues.put(COLUMN_COMPLETED, completed);
+        contentValues.put(COLUMN_PRIORITY, priority);
 
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues) != -1;
     }
 
-    public boolean updateTask(int id, String name, String description, String completed) {
+    public boolean updateTask(int id, String name, String description, String priority) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME, name);
         contentValues.put(COLUMN_DESCRIPTION, description);
-        contentValues.put(COLUMN_COMPLETED, completed);
+        contentValues.put(COLUMN_PRIORITY, priority);
         return sqLiteDatabase.update(TABLE_NAME, contentValues, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0;
     }
 
