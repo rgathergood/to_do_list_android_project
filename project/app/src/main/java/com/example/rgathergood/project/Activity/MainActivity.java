@@ -1,6 +1,9 @@
 package com.example.rgathergood.project.Activity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,19 +14,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rgathergood.project.DatabaseManager;
+import com.example.rgathergood.project.Databases.DatabaseManager;
 import com.example.rgathergood.project.R;
-import com.example.rgathergood.project.Task;
+import com.example.rgathergood.project.Models.Task;
 import com.example.rgathergood.project.TaskAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 

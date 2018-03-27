@@ -1,4 +1,4 @@
-package com.example.rgathergood.project;
+package com.example.rgathergood.project.Models;
 
 import java.io.Serializable;
 

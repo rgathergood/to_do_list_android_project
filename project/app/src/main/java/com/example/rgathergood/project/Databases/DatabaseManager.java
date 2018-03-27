@@ -1,10 +1,12 @@
-package com.example.rgathergood.project;
+package com.example.rgathergood.project.Databases;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.rgathergood.project.Models.Task;
 
 import java.util.ArrayList;
 

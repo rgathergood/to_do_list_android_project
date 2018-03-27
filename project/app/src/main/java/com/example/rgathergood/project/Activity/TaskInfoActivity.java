@@ -11,9 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rgathergood.project.DatabaseManager;
+import com.example.rgathergood.project.Databases.DatabaseManager;
 import com.example.rgathergood.project.R;
-import com.example.rgathergood.project.Task;
+import com.example.rgathergood.project.Models.Task;
 
 import java.io.Serializable;
 

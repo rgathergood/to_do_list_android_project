@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.rgathergood.project.Databases.DatabaseManager;
+import com.example.rgathergood.project.Models.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
