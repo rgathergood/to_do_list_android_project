@@ -17,9 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.TaskAddActivity"
-            android:label="Add New Task"
-            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.TaskInfoActivity"
             android:label="Task Information"
             android:screenOrientation="portrait"/>

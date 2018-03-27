@@ -21,10 +21,6 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable 
 
     DatabaseManager mDatabase;
 
-    EditText editTextName;
-    EditText editTextDescription;
-    Spinner spinnerPriority;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,11 +83,11 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable 
 
                 if (mDatabase.updateTask(task.getId(), name, description, priority)) {
                     Toast.makeText(TaskInfoActivity.this, "Task Updated!", Toast.LENGTH_SHORT).show();
-                    //refresh list view
+                    alertDialog.dismiss();
+                    //refresh
                 } else {
                     Toast.makeText(TaskInfoActivity.this, "Task Not Updated!", Toast.LENGTH_SHORT).show();
                 }
-                alertDialog.dismiss();
             }
         });
     }
