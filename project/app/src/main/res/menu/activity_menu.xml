@@ -5,14 +5,14 @@
     <item
         android:id="@+id/SortTitle"
         android:enabled="false"
-        android:title="Sort by Priority" />
+        android:title="@string/view_by_priority" />
     <item
         android:id="@+id/High"
-        android:title="High" />
+        android:title="@string/high" />
     <item
         android:id="@+id/Medium"
-        android:title="Medium" />
+        android:title="@string/medium" />
     <item
         android:id="@+id/Low"
-        android:title="Low" />
+        android:title="@string/low" />
 </menu>

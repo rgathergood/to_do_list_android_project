@@ -39,7 +39,7 @@
         android:backgroundTint="#FF8800"
         android:elevation="10dp"
         android:onClick="onClickDelete"
-        android:text="Complete"
+        android:text="@string/complete"
         android:textColor="@android:color/background_light"
         android:bottomRightRadius="30dp"
         android:bottomLeftRadius="30dp"

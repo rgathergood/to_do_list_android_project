@@ -29,7 +29,6 @@ import com.example.rgathergood.project.TaskAdapter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -48,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         mDatabase = new DatabaseManager(this);
         calendar = Calendar.getInstance();
         listView = findViewById(R.id.listViewTasks);
+        dateView = findViewById(R.id.textViewUpdateDate);
     }
 
     @Override
@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
+
+        dateView.setText("Complete by: " + day + "/" + month + "/" + year);
     }
 
     @Override

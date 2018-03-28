@@ -22,7 +22,6 @@
             android:name=".Activity.TaskInfoActivity"
             android:label="Task Information"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.Spinner" />
     </application>
 
 </manifest>

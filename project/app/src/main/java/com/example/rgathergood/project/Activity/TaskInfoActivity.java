@@ -22,7 +22,6 @@ import com.example.rgathergood.project.Models.Task;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class TaskInfoActivity extends AppCompatActivity implements Serializable, DatePickerDialog.OnDateSetListener {
 
@@ -38,6 +37,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
 
         mDatabase = new DatabaseManager(this);
         calendar = Calendar.getInstance();
+        dateView = findViewById(R.id.textViewUpdateDate);
 
         Intent intent = getIntent();
         final Task task = (Task) intent.getSerializableExtra("task");
@@ -69,6 +69,8 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
+
+        dateView.setText("Complete by: " + day + "/" + month + "/" + year);
     }
 
     private void updateTask(final Task task) {

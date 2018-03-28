@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.rgathergood.project.Models.Task;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by rgathergood on 24/03/2018.
@@ -68,7 +67,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
             String priority = cursor.getString(
                     cursor.getColumnIndexOrThrow(COLUMN_PRIORITY));
 
-//            Date date = new Date(deadlineDate);
             Task task = new Task(id, name, description, deadlineDate, priority);
             tasks.add(task);
         }
