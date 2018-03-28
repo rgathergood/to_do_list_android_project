@@ -26,7 +26,7 @@ import java.util.Date;
 
 public class TaskInfoActivity extends AppCompatActivity implements Serializable, DatePickerDialog.OnDateSetListener {
 
-    private Date date;
+    private Calendar calendar;
 
     DatabaseManager mDatabase;
     TextView dateView;
@@ -37,6 +37,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         setContentView(R.layout.activity_task_info);
 
         mDatabase = new DatabaseManager(this);
+        calendar = Calendar.getInstance();
 
         Intent intent = getIntent();
         final Task task = (Task) intent.getSerializableExtra("task");
@@ -46,7 +47,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         TextView textViewDescription = findViewById(R.id.textViewTaskDescription);
         textViewDescription.setText(task.getDescription());
         TextView textViewDateAdded = findViewById(R.id.textViewDateAdded);
-        textViewDateAdded.setText(task.getDateAdded());
+        textViewDateAdded.setText(task.getDate());
 
         findViewById(R.id.button_edit).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,22 +65,10 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        String monthStr = "";
-        String dayStr = "";
-        month += 1;
-        if (month < 10) {
-            monthStr = "0" + month;
-        } else {
-            monthStr = String.valueOf(month);
-        }
-        if (day < 10) {
-            dayStr = "0" + day;
-        } else {
-            dayStr = String.valueOf(day);
-        }
-
-        dateView.setText("Complete by: " + dayStr + "/" + monthStr + "/" + year);
-        date = new Date(year, month, day);
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
     }
 
     private void updateTask(final Task task) {
@@ -98,7 +87,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
 
         editTextName.setText(task.getName());
         editTextDescription.setText(task.getDescription());
-        dateView.setText(task.getDateAdded());
+        dateView.setText(task.getDate());
 
         view.findViewById(R.id.button_update_task).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +109,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
                 }
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String deadlineDateString = simpleDateFormat.format(date);
+                String deadlineDateString = simpleDateFormat.format(calendar.getTime());
 
                 if (mDatabase.updateTask(task.getId(), name, description, deadlineDateString, priority)) {
                     Toast.makeText(TaskInfoActivity.this, "Task Updated!", Toast.LENGTH_SHORT).show();

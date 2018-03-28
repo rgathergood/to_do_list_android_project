@@ -23,7 +23,6 @@
             android:label="Task Information"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.Spinner" />
-        <activity android:name=".Activity.DatePickerFragment"></activity>
     </application>
 
 </manifest>

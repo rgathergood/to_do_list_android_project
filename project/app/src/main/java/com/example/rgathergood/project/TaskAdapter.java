@@ -44,7 +44,7 @@ public class TaskAdapter extends ArrayAdapter<Task>{
         TextView textViewDateAdded = convertView.findViewById(R.id.textViewDateAdded);
 
         textViewName.setText(task.getName());
-        textViewDateAdded.setText(task.getDateAdded());
+        textViewDateAdded.setText(task.getDate());
 
         Button button = convertView.findViewById(R.id.button_complete);
 

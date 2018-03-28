@@ -33,7 +33,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private Date date;
+    private Calendar calendar;
 
     DatabaseManager mDatabase;
     ArrayList<Task> taskList;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         setContentView(R.layout.activity_main);
 
         mDatabase = new DatabaseManager(this);
-
+        calendar = Calendar.getInstance();
         listView = findViewById(R.id.listViewTasks);
     }
 
@@ -65,12 +65,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         listView.setAdapter(taskAdapter);
     }
 
-//    public String setTodaysDate(Date date) {
-//        SimpleDateFormat dateSQLformat = new SimpleDateFormat("yyyy/MM/dd");
-//        return dateSQLformat.format(date);
-//    }
-    //Do I need this?
-
     public void showDatePickerDialog(View view) {
         DatePickerFragment datePickerFragment = new DatePickerFragment();
         datePickerFragment.onDateSetListener = this;
@@ -79,22 +73,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        String monthStr = "";
-        String dayStr = "";
-        month += 1;
-        if (month < 10) {
-            monthStr = "0" + month;
-        } else {
-            monthStr = String.valueOf(month);
-        }
-        if (day < 10) {
-            dayStr = "0" + day;
-        } else {
-            dayStr = String.valueOf(day);
-        }
-
-        dateView.setText("Complete by: " + dayStr + "/" + monthStr + "/" + year);
-        date = new Date(year, month, day);
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
     }
 
     @Override
@@ -196,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 }
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String deadlineDateString = simpleDateFormat.format(date);
+                String deadlineDateString = simpleDateFormat.format(calendar.getTime());
 
 //                if (deadlineDateString.isEmpty()) {
 //                    Toast.makeText(MainActivity.this, "Please set a completion date", Toast.LENGTH_SHORT).show();
