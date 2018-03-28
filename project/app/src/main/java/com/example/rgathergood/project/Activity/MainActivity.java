@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,33 +22,40 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rgathergood.project.Databases.DatabaseManager;
+import com.example.rgathergood.project.Databases.PriorityManager;
+import com.example.rgathergood.project.Databases.TaskManager;
 import com.example.rgathergood.project.R;
 import com.example.rgathergood.project.Models.Task;
 import com.example.rgathergood.project.TaskAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private Calendar calendar;
 
-    DatabaseManager mDatabase;
+    PriorityManager priorityManager;
+    TaskManager mDatabase;
     ArrayList<Task> taskList;
     ListView listView;
     TextView dateView;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDatabase = new DatabaseManager(this);
+        mDatabase = new TaskManager(this);
+        priorityManager = new PriorityManager(this);
         calendar = Calendar.getInstance();
         listView = findViewById(R.id.listViewTasks);
         dateView = findViewById(R.id.textViewUpdateDate);
+        spinner = findViewById(R.id.spinner_priority);
     }
 
     @Override
@@ -88,20 +96,25 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem menuItem) {
-//        if (menuItem.getItemId() == R.id.High) {
-//
-//        }
-//        if (menuItem.getItemId() == R.id.Medium) {
-//
-//        }
-//
-//        if (menuItem.getItemId() == R.id.Low) {
-//
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.All){
+            refreshList();
+        }
+
+        if (menuItem.getItemId() == R.id.High) {
+
+        }
+
+        if (menuItem.getItemId() == R.id.Medium) {
+
+        }
+
+        if (menuItem.getItemId() == R.id.Low) {
+
+        }
+        return true;
+    }
 
     public void onListItemClick(View listItem) {
         Task task = (Task) listItem.getTag();
@@ -158,7 +171,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         final EditText editTextName = view.findViewById(R.id.task_name_add);
         final EditText editTextDescription = view.findViewById(R.id.task_description_add);
         dateView = view.findViewById(R.id.textViewUpdateDate);
-        final Spinner spinner = view.findViewById(R.id.spinner_priority);
+        spinner = view.findViewById(R.id.spinner_priority);
+//        populateSpinner();
 
         view.findViewById(R.id.buttonAddTask).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     return;
                 }
 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String deadlineDateString = simpleDateFormat.format(calendar.getTime());
 
 //                if (deadlineDateString.isEmpty()) {
@@ -209,5 +223,14 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
             return new DatePickerDialog(getActivity(), onDateSetListener, year, month, day);
         }
+    }
+
+    private void populateSpinner() {
+        priorityManager = new PriorityManager(this);
+        String[] array = priorityManager.getAll();
+        List<String> priorityList = Arrays.asList(array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, priorityList);
+        Spinner spinner = findViewById(R.id.spinner_priority);
+        spinner.setAdapter(adapter);
     }
 }

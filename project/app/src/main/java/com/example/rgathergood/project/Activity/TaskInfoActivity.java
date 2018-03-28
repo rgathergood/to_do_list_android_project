@@ -9,25 +9,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rgathergood.project.Databases.DatabaseManager;
+import com.example.rgathergood.project.Databases.PriorityManager;
+import com.example.rgathergood.project.Databases.TaskManager;
 import com.example.rgathergood.project.R;
 import com.example.rgathergood.project.Models.Task;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class TaskInfoActivity extends AppCompatActivity implements Serializable, DatePickerDialog.OnDateSetListener {
 
     private Calendar calendar;
 
-    DatabaseManager mDatabase;
+    TaskManager mDatabase;
+    PriorityManager priorityManager;
     TextView dateView;
 
     @Override
@@ -35,7 +40,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_info);
 
-        mDatabase = new DatabaseManager(this);
+        mDatabase = new TaskManager(this);
         calendar = Calendar.getInstance();
         dateView = findViewById(R.id.textViewUpdateDate);
 
@@ -110,7 +115,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
                     return;
                 }
 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String deadlineDateString = simpleDateFormat.format(calendar.getTime());
 
                 if (mDatabase.updateTask(task.getId(), name, description, deadlineDateString, priority)) {
@@ -136,5 +141,14 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
 
             return new DatePickerDialog(getActivity(), onDateSetListener, year, month, day);
         }
+    }
+
+    private void populateSpinner() {
+        priorityManager = new PriorityManager(this);
+        String[] array = priorityManager.getAll();
+        List<String> priorityList = Arrays.asList(array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, priorityList);
+        Spinner spinner = findViewById(R.id.spinner_update_priority);
+        spinner.setAdapter(adapter);
     }
 }

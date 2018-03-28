@@ -7,6 +7,9 @@
         android:enabled="false"
         android:title="@string/view_by_priority" />
     <item
+        android:id="@+id/All"
+        android:title="All" />
+    <item
         android:id="@+id/High"
         android:title="@string/high" />
     <item

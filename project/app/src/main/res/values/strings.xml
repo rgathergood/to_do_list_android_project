@@ -22,8 +22,6 @@
     <string name="low">Low</string>
     <string name="complete">Complete</string>
     <array name="priority">
-        <item>Low</item>
-        <item>Medium</item>
-        <item>High</item>
+        <item>Error</item>
     </array>
 </resources>

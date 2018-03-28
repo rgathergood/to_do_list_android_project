@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.rgathergood.project.Databases.DatabaseManager;
+import com.example.rgathergood.project.Databases.TaskManager;
 import com.example.rgathergood.project.Models.Task;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class TaskAdapter extends ArrayAdapter<Task>{
 
     Context context;
     List<Task> taskList;
-    DatabaseManager mDatabase;
+    TaskManager mDatabase;
 
     public TaskAdapter(Context context, ArrayList<Task> taskList) {
         super(context, 0, taskList);

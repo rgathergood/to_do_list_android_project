@@ -11,14 +11,14 @@ public class Task implements Serializable {
     String name;
     String description;
     String date;
-    String completed;
+    String priority;
 
-    public Task(int id, String name, String description, String date, String completed) {
+    public Task(int id, String name, String description, String date, String priority) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.date = date;
-        this.completed = completed;
+        this.priority = priority;
     }
 
     public int getId() {
@@ -37,8 +37,12 @@ public class Task implements Serializable {
         return date;
     }
 
-    public String isCompleted() {
-        return completed;
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority() {
+        this.priority = priority;
     }
 
 }
