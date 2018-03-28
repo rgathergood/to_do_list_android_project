@@ -22,10 +22,6 @@
             android:name=".Activity.TaskInfoActivity"
             android:label="Task Information"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activity.AboutActivity"
-            android:label="About"
-            android:screenOrientation="portrait" />
         <activity android:name=".Activity.Spinner" />
         <activity android:name=".Activity.DatePickerFragment"></activity>
     </application>

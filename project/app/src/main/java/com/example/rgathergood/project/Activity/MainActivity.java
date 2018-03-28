@@ -33,7 +33,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private Date date = new Date();
+    private Date date;
 
     DatabaseManager mDatabase;
     ArrayList<Task> taskList;
@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         mDatabase = new DatabaseManager(this);
 
         listView = findViewById(R.id.listViewTasks);
-
-        dateView = findViewById(R.id.textViewDate);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         listView.setAdapter(taskAdapter);
     }
 
-//    public String setTodaysDate(Date date) {  // Pass in a java.util.date, get out a string of "yyyy/MM/dd"
+//    public String setTodaysDate(Date date) {
 //        SimpleDateFormat dateSQLformat = new SimpleDateFormat("yyyy/MM/dd");
 //        return dateSQLformat.format(date);
 //    }
@@ -95,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             dayStr = String.valueOf(day);
         }
 
-        TextView dateView = (TextView) findViewById(R.id.textViewDate);
         dateView.setText("Complete by: " + dayStr + "/" + monthStr + "/" + year);
+        date = new Date(year, month, day);
     }
 
     @Override
@@ -106,14 +104,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.about) {
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem menuItem) {
+//        if (menuItem.getItemId() == R.id.High) {
+//
+//        }
+//        if (menuItem.getItemId() == R.id.Medium) {
+//
+//        }
+//
+//        if (menuItem.getItemId() == R.id.Low) {
+//
+//        }
+//        return true;
+//    }
 
     public void onListItemClick(View listItem) {
         Task task = (Task) listItem.getTag();
@@ -169,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
         final EditText editTextName = view.findViewById(R.id.task_name_add);
         final EditText editTextDescription = view.findViewById(R.id.task_description_add);
-        final TextView editDeadlineDate = view.findViewById(R.id.textViewDate);
+        dateView = view.findViewById(R.id.textViewUpdateDate);
         final Spinner spinner = view.findViewById(R.id.spinner_priority);
 
         view.findViewById(R.id.buttonAddTask).setOnClickListener(new View.OnClickListener() {
@@ -177,8 +181,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             public void onClick(View view) {
                 String name = editTextName.getText().toString().trim();
                 String description = editTextDescription.getText().toString().trim();
-                Date deadlineDate = new Date(dateView.getText().toString());
-                //problem here
                 String priority = spinner.getSelectedItem().toString().trim();
 
                 if (name.isEmpty()) {
@@ -195,6 +197,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String deadlineDateString = simpleDateFormat.format(date);
+
+//                if (deadlineDateString.isEmpty()) {
+//                    Toast.makeText(MainActivity.this, "Please set a completion date", Toast.LENGTH_SHORT).show();
+//                }
 
                 if (mDatabase.addTask(name, description, deadlineDateString, priority)) {
                     Toast.makeText(MainActivity.this, "Task Added", Toast.LENGTH_LONG).show();

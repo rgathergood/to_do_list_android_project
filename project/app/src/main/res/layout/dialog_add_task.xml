@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUpdateDate" />
 
     <EditText
         android:id="@+id/task_name_add"
@@ -101,7 +101,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewDate"
+        android:id="@+id/textViewUpdateDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -125,7 +125,7 @@
         android:onClick="showDatePickerDialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.307"
-        app:layout_constraintStart_toEndOf="@+id/textViewDate"
+        app:layout_constraintStart_toEndOf="@+id/textViewUpdateDate"
         app:layout_constraintTop_toBottomOf="@+id/task_description_add"
         app:srcCompat="@drawable/ic_today_24dp" />
 

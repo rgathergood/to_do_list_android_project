@@ -1,11 +1,15 @@
 package com.example.rgathergood.project.Activity;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,10 +20,16 @@ import com.example.rgathergood.project.R;
 import com.example.rgathergood.project.Models.Task;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
-public class TaskInfoActivity extends AppCompatActivity implements Serializable {
+public class TaskInfoActivity extends AppCompatActivity implements Serializable, DatePickerDialog.OnDateSetListener {
+
+    private Date date;
 
     DatabaseManager mDatabase;
+    TextView dateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,32 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable 
         });
     }
 
+    public void showDatePickerDialogUpdate(View view) {
+        MainActivity.DatePickerFragment datePickerFragment = new MainActivity.DatePickerFragment();
+        datePickerFragment.onDateSetListener = this;
+        datePickerFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        String monthStr = "";
+        String dayStr = "";
+        month += 1;
+        if (month < 10) {
+            monthStr = "0" + month;
+        } else {
+            monthStr = String.valueOf(month);
+        }
+        if (day < 10) {
+            dayStr = "0" + day;
+        } else {
+            dayStr = String.valueOf(day);
+        }
+
+        dateView.setText("Complete by: " + dayStr + "/" + monthStr + "/" + year);
+        date = new Date(year, month, day);
+    }
+
     private void updateTask(final Task task) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -57,10 +93,12 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable 
 
         final EditText editTextName = view.findViewById(R.id.editTextUpdateName);
         final EditText editTextDescription = view.findViewById(R.id.editTextUpdateDescription);
+        dateView = view.findViewById(R.id.textViewUpdateDate);
         final Spinner spinner = view.findViewById(R.id.spinner_update_priority);
 
         editTextName.setText(task.getName());
         editTextDescription.setText(task.getDescription());
+        dateView.setText(task.getDateAdded());
 
         view.findViewById(R.id.button_update_task).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +119,10 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable 
                     return;
                 }
 
-                if (mDatabase.updateTask(task.getId(), name, description, priority)) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String deadlineDateString = simpleDateFormat.format(date);
+
+                if (mDatabase.updateTask(task.getId(), name, description, deadlineDateString, priority)) {
                     Toast.makeText(TaskInfoActivity.this, "Task Updated!", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                     TaskInfoActivity.this.finish();
@@ -90,5 +131,19 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable 
                 }
             }
         });
+    }
+
+    public static class DatePickerFragment extends DialogFragment {
+
+        public static DatePickerDialog.OnDateSetListener onDateSetListener;
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), onDateSetListener, year, month, day);
+        }
     }
 }
