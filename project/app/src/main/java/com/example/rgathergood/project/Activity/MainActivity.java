@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         final EditText editTextDescription = view.findViewById(R.id.task_description_add);
         dateView = view.findViewById(R.id.textViewUpdateDate);
         spinner = view.findViewById(R.id.spinner_priority);
-//        populateSpinner();
+        populateSpinner();
 
         view.findViewById(R.id.buttonAddTask).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,7 +230,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         String[] array = priorityManager.getAll();
         List<String> priorityList = Arrays.asList(array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, priorityList);
-        Spinner spinner = findViewById(R.id.spinner_priority);
         spinner.setAdapter(adapter);
     }
 }

@@ -34,6 +34,7 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
     TaskManager mDatabase;
     PriorityManager priorityManager;
     TextView dateView;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         mDatabase = new TaskManager(this);
         calendar = Calendar.getInstance();
         dateView = findViewById(R.id.textViewUpdateDate);
+        spinner = findViewById(R.id.spinner_update_priority);
+
 
         Intent intent = getIntent();
         final Task task = (Task) intent.getSerializableExtra("task");
@@ -90,7 +93,8 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         final EditText editTextName = view.findViewById(R.id.editTextUpdateName);
         final EditText editTextDescription = view.findViewById(R.id.editTextUpdateDescription);
         dateView = view.findViewById(R.id.textViewUpdateDate);
-        final Spinner spinner = view.findViewById(R.id.spinner_update_priority);
+        spinner = view.findViewById(R.id.spinner_update_priority);
+        populateSpinner();
 
         editTextName.setText(task.getName());
         editTextDescription.setText(task.getDescription());
@@ -148,7 +152,6 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         String[] array = priorityManager.getAll();
         List<String> priorityList = Arrays.asList(array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, priorityList);
-        Spinner spinner = findViewById(R.id.spinner_update_priority);
         spinner.setAdapter(adapter);
     }
 }
