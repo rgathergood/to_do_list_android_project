@@ -1,7 +1,5 @@
 # wk9_project
 
-# Java/Android Project Definitions - Solo Project
-
 ## To-Do List
 
 This was the second project I completed at CodeClan (Week 9) where I created a To Do List app in Android using Java and SQLite3.
