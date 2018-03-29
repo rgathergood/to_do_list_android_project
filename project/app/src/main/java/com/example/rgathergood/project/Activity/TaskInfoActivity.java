@@ -96,6 +96,25 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         spinner = view.findViewById(R.id.spinner_update_priority);
         populateSpinner();
 
+        int priorityPosition;
+        String priority = task.getPriority();
+
+        switch (priority) {
+            case "Low":
+                priorityPosition = 0;
+                break;
+            case "Medium":
+                priorityPosition = 1;
+                break;
+            case "High":
+                priorityPosition = 2;
+                break;
+            default:
+                priorityPosition = 0;
+        }
+
+        spinner.setSelection(priorityPosition);
+
         editTextName.setText(task.getName());
         editTextDescription.setText(task.getDescription());
         dateView.setText(task.getDate());
