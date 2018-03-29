@@ -26,7 +26,7 @@ import com.example.rgathergood.project.Databases.PriorityManager;
 import com.example.rgathergood.project.Databases.TaskManager;
 import com.example.rgathergood.project.R;
 import com.example.rgathergood.project.Models.Task;
-import com.example.rgathergood.project.TaskAdapter;
+import com.example.rgathergood.project.Adapter.TaskAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

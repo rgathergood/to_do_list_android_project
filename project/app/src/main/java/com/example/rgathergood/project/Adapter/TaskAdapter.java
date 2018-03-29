@@ -1,4 +1,4 @@
-package com.example.rgathergood.project;
+package com.example.rgathergood.project.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rgathergood.project.Models.Task;
+import com.example.rgathergood.project.R;
 
 import java.util.ArrayList;
 import java.util.List;
