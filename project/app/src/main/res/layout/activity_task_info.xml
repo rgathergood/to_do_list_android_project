@@ -34,17 +34,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTaskName"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" />
 
-    <Spinner
-        android:id="@+id/spinnerPriority"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
     <TextView
         android:id="@+id/textViewDateAdded"
         android:layout_width="wrap_content"
@@ -83,14 +72,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="44dp"
         android:background="#FF8800"
         android:elevation="10dp"
         android:text="@string/edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPriority" />
+        app:layout_constraintTop_toBottomOf="@+id/priorityLevel" />
 
     <TextView
         android:id="@+id/textView"
@@ -103,5 +92,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTaskDescription" />
+
+    <TextView
+        android:id="@+id/priorityLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
 </android.support.constraint.ConstraintLayout>

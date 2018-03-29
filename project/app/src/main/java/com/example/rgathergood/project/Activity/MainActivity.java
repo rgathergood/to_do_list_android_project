@@ -1,5 +1,6 @@
 package com.example.rgathergood.project.Activity;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     ListView listView;
     TextView dateView;
     Spinner spinner;
+    TaskAdapter taskAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,20 +100,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.All){
+        if (menuItem.getItemId() == R.id.All) {
             refreshList();
         }
 
         if (menuItem.getItemId() == R.id.High) {
-
+            taskAdapter.filterTasks("High");
         }
 
         if (menuItem.getItemId() == R.id.Medium) {
-
+            taskAdapter.filterTasks("Medium");
         }
 
         if (menuItem.getItemId() == R.id.Low) {
-
+            taskAdapter.filterTasks("Low");
         }
         return true;
     }

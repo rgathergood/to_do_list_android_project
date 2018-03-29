@@ -1,5 +1,6 @@
 package com.example.rgathergood.project.Activity;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,6 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -54,8 +57,12 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         textViewName.setText(task.getName());
         TextView textViewDescription = findViewById(R.id.textViewTaskDescription);
         textViewDescription.setText(task.getDescription());
+        TextView textViewPriority = findViewById(R.id.priorityLevel);
+        textViewPriority.setText(task.getPriority());
         TextView textViewDateAdded = findViewById(R.id.textViewDateAdded);
         textViewDateAdded.setText(task.getDate());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.button_edit).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,5 +179,20 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
         List<String> priorityList = Arrays.asList(array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, priorityList);
         spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 }
