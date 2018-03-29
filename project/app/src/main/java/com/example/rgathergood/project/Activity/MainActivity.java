@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public void refreshList() {
         taskList = mDatabase.selectAllDesc();
 
-        TaskAdapter taskAdapter = new TaskAdapter(this, taskList);
+        taskAdapter = new TaskAdapter(this, taskList);
 
         listView.setAdapter(taskAdapter);
     }
@@ -105,14 +105,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         }
 
         if (menuItem.getItemId() == R.id.High) {
+            refreshList();
             taskAdapter.filterTasks("High");
         }
 
         if (menuItem.getItemId() == R.id.Medium) {
+            refreshList();
             taskAdapter.filterTasks("Medium");
         }
 
         if (menuItem.getItemId() == R.id.Low) {
+            refreshList();
             taskAdapter.filterTasks("Low");
         }
         return true;
