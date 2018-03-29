@@ -1,6 +1,5 @@
 package com.example.rgathergood.project.Activity;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -136,12 +135,6 @@ public class TaskInfoActivity extends AppCompatActivity implements Serializable,
                 if (name.isEmpty()) {
                     editTextName.setError("Name can't be empty!");
                     editTextName.requestFocus();
-                    return;
-                }
-
-                if (description.isEmpty()) {
-                    editTextDescription.setError("Description can't be empty!");
-                    editTextDescription.requestFocus();
                     return;
                 }
 

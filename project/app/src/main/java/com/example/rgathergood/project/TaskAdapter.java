@@ -2,15 +2,15 @@ package com.example.rgathergood.project;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.rgathergood.project.Databases.TaskManager;
 import com.example.rgathergood.project.Models.Task;
 
 import java.util.ArrayList;
@@ -56,13 +56,22 @@ public class TaskAdapter extends BaseAdapter {
 
         TextView textViewName = convertView.findViewById(R.id.textViewTaskName);
         TextView textViewDateAdded = convertView.findViewById(R.id.textViewDateAdded);
+        Button button = convertView.findViewById(R.id.button_complete);
+        ImageView priorityRag = convertView.findViewById(R.id.priorityRag);
 
         textViewName.setText(task.getName());
         textViewDateAdded.setText(task.getDate());
-
-        Button button = convertView.findViewById(R.id.button_complete);
-
         button.setTag(task);
+        priorityRag.setTag(task);
+
+        if (task.getPriority().equals("Low")) {
+            priorityRag.setImageResource(R.color.colorYellow);
+            Log.d("Priority", String.valueOf(task.getPriority()));
+        } else if (task.getPriority().equals("Medium")) {
+            priorityRag.setImageResource(R.color.colorAccent);
+        } else if (task.getPriority().equals("High")) {
+            priorityRag.setImageResource(R.color.colorPrimaryDark);
+        }
 
         convertView.setTag(task);
 

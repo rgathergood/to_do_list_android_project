@@ -21,4 +21,6 @@
     <string name="medium">Medium</string>
     <string name="low">Low</string>
     <string name="complete">Complete</string>
+    <string name="all">All</string>
+    <string name="complete_by">Complete by:</string>
 </resources>

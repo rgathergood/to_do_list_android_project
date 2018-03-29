@@ -1,6 +1,5 @@
 package com.example.rgathergood.project.Activity;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -192,18 +191,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     return;
                 }
 
-                if (description.isEmpty()) {
-                    editTextDescription.setError("Description can't be empty!");
-                    editTextDescription.requestFocus();
-                    return;
-                }
-
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String deadlineDateString = simpleDateFormat.format(calendar.getTime());
-
-//                if (deadlineDateString.isEmpty()) {
-//                    Toast.makeText(MainActivity.this, "Please set a completion date", Toast.LENGTH_SHORT).show();
-//                }
 
                 if (mDatabase.addTask(name, description, deadlineDateString, priority)) {
                     Toast.makeText(MainActivity.this, "Task Added", Toast.LENGTH_LONG).show();
